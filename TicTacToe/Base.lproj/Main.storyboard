@@ -3,7 +3,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -13,11 +19,11 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" tag="10" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="board.png" translatesAutoresizingMaskIntoConstraints="NO" id="vKz-Z1-TDB">
+                            <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="board.png" translatesAutoresizingMaskIntoConstraints="NO" id="vKz-Z1-TDB">
                                 <rect key="frame" x="0.0" y="146" width="375" height="375"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="375" id="4lw-sK-Owg"/>
@@ -123,6 +129,27 @@
                                     <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tuw-ne-L1o"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Crosses has won!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXl-lK-KtN">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="589"/>
+                                <color key="backgroundColor" red="0.11647437151541046" green="0.076851400326445773" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="10" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qbk-a8-Wks">
+                                <rect key="frame" x="0.0" y="612" width="375" height="55"/>
+                                <color key="backgroundColor" red="0.060767853632599601" green="0.59296085858585856" blue="0.12916780059523766" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="I9C-RR-li7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Play Again">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playAgainPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kQt-hz-9Zr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -135,22 +162,32 @@
                             <constraint firstItem="Hi6-pt-Mtg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-128.5" id="Bj2-ck-A2c"/>
                             <constraint firstItem="cp3-5m-2kA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="3.5" id="Da5-th-OEZ"/>
                             <constraint firstItem="NoD-7i-h5s" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-123.5" id="Fjn-zo-ZHq"/>
+                            <constraint firstItem="FXl-lK-KtN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RAI-XU-yTL"/>
+                            <constraint firstItem="FXl-lK-KtN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="RvP-fL-fB2"/>
                             <constraint firstItem="cER-m2-XgR" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-128.5" id="U5k-D8-3Of"/>
                             <constraint firstItem="NoD-7i-h5s" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="W5f-TW-VtS"/>
                             <constraint firstItem="cER-m2-XgR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="129.5" id="WcR-EU-12M"/>
+                            <constraint firstItem="Qbk-a8-Wks" firstAttribute="top" secondItem="FXl-lK-KtN" secondAttribute="bottom" id="Xyc-nU-Rnz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Qbk-a8-Wks" secondAttribute="trailing" constant="-20" id="cqE-X9-q6l"/>
+                            <constraint firstItem="FXl-lK-KtN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="dMV-ju-DNw"/>
                             <constraint firstItem="Lej-NF-Vl3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="131.5" id="doN-mh-KY7"/>
                             <constraint firstItem="6yN-60-170" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fZC-tE-YDV"/>
                             <constraint firstItem="vKz-Z1-TDB" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ghY-Vu-71j"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Qbk-a8-Wks" secondAttribute="bottom" id="h7S-qZ-iAz"/>
                             <constraint firstItem="Lej-NF-Vl3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-123.5" id="haq-b1-vMI"/>
                             <constraint firstItem="hXl-ch-0Tc" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="131.5" id="iPj-Yf-AIz"/>
                             <constraint firstItem="MkJ-Zd-M2x" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="129.5" id="r1d-lk-AEr"/>
                             <constraint firstItem="wre-wi-fLu" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-128.5" id="rSH-rJ-5VC"/>
                             <constraint firstItem="Hi6-pt-Mtg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="3.5" id="reK-Qv-eLX"/>
+                            <constraint firstItem="Qbk-a8-Wks" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="vmr-kJ-3rr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FXl-lK-KtN" secondAttribute="trailing" constant="-20" id="vpJ-E7-jFL"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="button" destination="wre-wi-fLu" id="EEn-Yu-YA7"/>
+                        <outlet property="gameOverLabel" destination="FXl-lK-KtN" id="BQf-am-SIK"/>
+                        <outlet property="playAgainButton" destination="Qbk-a8-Wks" id="L9p-UR-7O1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

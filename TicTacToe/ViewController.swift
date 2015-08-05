@@ -27,15 +27,45 @@ class ViewController: UIViewController {
     ]
 
     @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var gameOverLabel: UILabel!
+    @IBOutlet weak var playAgainButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        gameOverLabel.hidden = true
+        playAgainButton.hidden = true
+        gameOverLabel.center = CGPointMake(gameOverLabel.center.x - 400, gameOverLabel.center.y)
+        playAgainButton.center = CGPointMake(playAgainButton.center.x - 400, playAgainButton.center.y)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // this method is called when everything is created by not yet displayed on the screen
+    override func viewDidLayoutSubviews() {
+
+    }
+    
+    @IBAction func playAgainPressed(sender: AnyObject) {
+        activePlayer = 1
+        
+        gameActive = true
+        
+        gameState = [0,0,0,0,0,0,0,0,0]
+        
+        var button: UIButton
+        
+        for var i = 0; i < 9; i++ {
+            button = view.viewWithTag(i) as! UIButton
+            button.setImage(nil, forState: .Normal)
+        }
+        gameOverLabel.hidden = true
+        playAgainButton.hidden = true
+        gameOverLabel.center = CGPointMake(gameOverLabel.center.x - 400, gameOverLabel.center.y)
+        playAgainButton.center = CGPointMake(playAgainButton.center.x - 400, playAgainButton.center.y)
     }
 
     @IBAction func buttonPressed(sender: AnyObject) {
@@ -57,11 +87,21 @@ class ViewController: UIViewController {
             for combination in winningCombinations {
                 //check if gameState shows a winning combination
                 if gameState[combination[0]] != 0 && gameState[combination[0]] == gameState[combination[1]] && gameState[combination[1]] == gameState[combination[2]] {
-                    if gameState[combination[0]] == 1 {
-                        print("Noughts has won!")
-                    } else {
-                        print("Crosses has won!")
+                    
+                    var labelText = "Noughts has won!"
+                    
+                    if gameState[combination[0]] == 2 {
+                        labelText = "Crosses has won!"
                     }
+                    
+                    gameOverLabel.text = labelText
+                    gameOverLabel.hidden = false
+                    playAgainButton.hidden = false
+                    
+                    UIView.animateWithDuration(0.5, animations: { () -> Void in
+                        self.gameOverLabel.center = CGPointMake(self.gameOverLabel.center.x + 400, self.gameOverLabel.center.y)
+                        self.playAgainButton.center = CGPointMake(self.playAgainButton.center.x + 400, self.playAgainButton.center.y)
+                    })
                     gameActive = false
                 }
             }

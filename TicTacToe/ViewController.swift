@@ -9,7 +9,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var maxMoves = 0
     var activePlayer = 1 // 1 = noughts, 2 = crosses
     var gameActive = true
     var gameState = [0,0,0,0,0,0,0,0,0]
@@ -44,10 +43,12 @@ class ViewController: UIViewController {
 //    this method is called when everything is created by not yet displayed on the screen - doesn't work for some reason
 //    override func viewDidLayoutSubviews() {
 //    }
-    
+    var totalMoves = 0
+
     @IBAction func buttonPressed(sender: AnyObject) {
+        var labelText = ""
         if gameState[sender.tag] == 0 && gameActive == true {
-            maxMoves++
+            totalMoves++
             var image = UIImage()
             gameState[sender.tag] = activePlayer
             
@@ -59,33 +60,38 @@ class ViewController: UIViewController {
                 activePlayer = 1
             }
             sender.setImage(image, forState: .Normal)
-                    
-            for combination in winningCombinations {
-                //check if gameState shows a winning combination
-                if gameState[combination[0]] != 0 && gameState[combination[0]] == gameState[combination[1]] && gameState[combination[1]] == gameState[combination[2]] {
-                        
-                    var labelText = "Noughts has won!"
-                    if gameState[combination[0]] == 2 {
-                        labelText = "Crosses has won!"
-                    }
-                    gameOverLabel.text = labelText
-                    slideInAnimation()
-                    
+            
+            var isThereAWinner = false
+            
+            var winningCombo = 0
+
+            for var i = 0; i < 8; i++ {
+                if gameState[winningCombinations[i][0]] == gameState[winningCombinations[i][1]] && gameState[winningCombinations[i][1]] == gameState[winningCombinations[i][2]] && gameState[winningCombinations[i][0]] != 0 {
+                    isThereAWinner = true
+                    winningCombo = i
                 }
-                // Doesn't work for diagonal 0 wins on the last move, not sure why
-//                else if maxMoves == 9 {
-//                    gameOverLabel.text = "TIE, MOTHERFUCKER"
-//                    slideInAnimation()
-//                }
+            }
+            if isThereAWinner == true {
+                if gameState[winningCombinations[winningCombo][0]] == 1 {
+                    labelText = "Noughts has won!"
+                } else if gameState[winningCombinations[winningCombo][0]] == 2 {
+                    labelText = "Crosses has won!"
+                }
+                gameOverLabel.text = labelText
+                slideInAnimation()
+            } else if totalMoves == 9 {
+                labelText = "TIE, MOTHERFUCKER!"
+                gameOverLabel.text = labelText
+                slideInAnimation()
             }
         }
-        print(maxMoves)
+        print(totalMoves)
     }
     
     @IBAction func playAgainPressed(sender: AnyObject) {
+        totalMoves = 0
         activePlayer = 1
         gameActive = true
-        maxMoves = 0
         gameState = [0,0,0,0,0,0,0,0,0]
         var button: UIButton
         
